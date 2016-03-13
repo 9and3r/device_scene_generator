@@ -138,6 +138,7 @@ function fitZoom(){
 
 function downloadPNG(element){
     selectedChange(undefined);
+    draw();
     var download = sceneHolder.canvas.toDataURL('image/png');
     window.open(download);
 }
