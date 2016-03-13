@@ -137,7 +137,7 @@ function fitZoom(){
 }
 
 function downloadPNG(element){
-  console.log("Hemen nao");
+    selectedChange(undefined);
     var download = sceneHolder.canvas.toDataURL('image/png');
     window.open(download);
 }
