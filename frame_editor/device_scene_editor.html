@@ -1,0 +1,127 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+
+<title>Device scene editor</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+<script src="../lib/js/device_scene_generator.js"></script>
+<script src="../lib/js/device_frames.js"></script>
+<script src="frame_editor.js"></script>
+<link rel="stylesheet" href="style.css" /> 
+
+</head>
+<body>
+
+	<div id="menu_container">
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">Device Frames</div>
+			<div class="panel-body">
+				<select id="device_select"></select>
+				<button id="device_add">Add to scene</button><br>
+				<button onclick="document.getElementById('new_frame_panel').classList.remove('invisible');">Create new</button>
+			</div>
+		</div>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">Canvas options</div>
+			<div class="panel-body">
+				<table>
+					<tr><td>Width:</td> <td><input type="number" id="canvas_width" min="10"></td><td><input type="button" value="Fit" onclick="fitCanvasWidth();"></td></tr>
+					<tr><td>Heigth:</td> <td><input type="number" id="canvas_height" min="10"></td><td><input type="button" value="Fit" onclick="fitCanvasHeight();"></td></tr>
+					<tr><td>Zoom:</td> <td><input type="number" id="canvas_zoom" min="1" onchange="onZoomChanged();"></td><td><input type="button" value="Fit" onclick="fitZoom();"></td></tr>
+					<tr><td>Base PPI:</td> <td><input type="number" min="100" id="base_ppi" onchange="changeBasePPI(this.value);"></td></tr>
+				</table>
+			</div>
+		</div>
+
+
+
+		<div class="panel panel-primary invisible" id="current_device_panel">
+			<div class="panel-heading">Current device</div>
+			<div class="panel-body">
+				<input type="button" onclick="openChangeScreen();" value="Set screen">
+				<table>
+					<tr><td><input type="button" id="canvas_width" value="Back" onclick="backOrFront(false, false);"></td><td><input type="button" value="Front" onclick="backOrFront(true, false);"></td></tr>
+					<tr><td><input type="button" id="canvas_width" value="To background" onclick="backOrFront(false, true);"></td><td><input type="button" value="To foreground" onclick="backOrFront(true, true);"></td></tr>
+				</table>
+			</div>
+
+		</div>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">Download Options</div>
+			<div class="panel-body">
+				<input type="button" onclick="downloadPNG(this);" value="Download">
+			</div>
+
+		</div>
+
+		<div>
+		Device Frames images provided by default (Nexus 5X, 6P and wear round and square) extracted from <a href="http://developer.android.com/distribute/tools/promote/device-art.html">Device Art Generator</a> (and slightly modified) are licensed under <a href="http://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a>.
+		</div>
+
+
+
+	</div>
+
+	<div id="main_container">
+
+
+
+		<canvas id="canvas"></canvas>
+	</div>
+
+	<img id="image"/>
+
+	<div id="zoom_buttons" class="btn-group btn-group-lg" role="group">
+		<button type="button" class="btn btn-default" onclick="zoomChange(-10);">-</button>
+		<button type="button" class="btn btn-default" onclick="zoomChange(10);">+</button>
+	</div>
+
+	<div class= "floating invisible" id="screens_panel" onclick="document.getElementById('screens_panel').classList.add('invisible');">
+
+		<div class="panel panel-primary floating_panel" onclick="stopPropagation(event);">
+			<div class="panel-heading">Device Frames Editor</div>
+			<div class="panel-body"  id ="screens">
+				<input type='file' name='userFile' multiple="multiple" onchange="uploadScreens(this.files)">
+				<img class="preview" data-pos="-1" onclick="onPeviewSelected(this);" src="images/no_screen.png">
+			</div>
+		</div>
+	</div>
+
+	<div class= "floating invisible" id="new_frame_panel" onclick="document.getElementById('new_frame_panel').classList.add('invisible');">
+
+		<div class="panel panel-primary floating_panel" onclick="stopPropagation(event);">
+			<div class="panel-heading">New device frame</div>
+			<div class="panel-body"  id ="screens">
+
+				<table>
+					<tr><td>Name:</td> <td><input type="text" id="frame_name"></td><td rowspan="8"><img id="new_device_screen_image" class="preview"></td></tr>
+					<tr><td>Screen width (pixels):</td> <td><input type="number" id="frame_width" min="1"></td></tr>
+					<tr><td>Screen height (pixels):</td> <td><input type="number" id="frame_height" min="1"></td></tr>
+					<tr><td>PPI:</td> <td><input type="number" min="1" id="frame_ppi"></td></tr>
+					<tr><td>Screen left padding:</td> <td><input type="number" min="1" id="frame_left_padding"></td></tr>
+					<tr><td>Screen top padding:</td> <td><input type="number" min="1" id="frame_top_padding"></td></tr>
+					<tr><td>Screen image:</td> <td><input type='file' name='userFile' onchange="onNewScreenImageChanged(this.files)"></td></tr>
+					<tr><td><br></td></tr>
+					<tr><td colspan="2"><input type="button" value="Add frame" onclick="createNewFrame();"></input></td></tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>
