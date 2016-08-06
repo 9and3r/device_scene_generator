@@ -6,7 +6,9 @@ This repository is to help developers create framed screenshoots to showcase the
  
 ## Device scene generator lib
 
-You can use the lib directly to showcase your app in the web. Once the setup is done you can change the screenshoots without creating the images directly. You can also use it to make dynamic images ([Example of dynamic images](http://live-tracking.appspot.com/en/index.jsp))
+You can use the lib directly to showcase your app in the web. Once the setup is done you can change the screenshoots without creating the images directly. 
+
+You can also use it to make dynamic images ([Example of dynamic images](http://live-tracking.appspot.com/en/index.jsp)). You can see in the example the devices and screens of the app changing dinamycally. You can [check the code here] (http://live-tracking.appspot.com/js/device_images_generator.js) 
 
 ## Device scene generator web
 
