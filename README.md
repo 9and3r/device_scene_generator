@@ -17,6 +17,7 @@ You can also use it to make dynamic images ([Example of dynamic images](http://l
 I recomend using [the ones provided from facebook](http://facebook.design/devices) as it look great (I contacted them to include them by default but I have not received the response yet).
 
 Example image:
+
 ![Generated image example](/examples/img/example_image.png)
 
 
