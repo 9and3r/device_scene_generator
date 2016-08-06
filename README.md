@@ -1,8 +1,8 @@
 # Device scene generator
 
 This repository is to help developers create framed screenshoots to showcase their apps. You have to options to do it:
- - [Device scene generator web](##Device scene generator web)
- - [Device scene generator lib](##Device scene generator lib)
+ - [Device scene generator lib](#Device scene generator lib)
+ - [Device scene generator web](#Device scene generator web)
  
 ## Device scene generator lib
 
